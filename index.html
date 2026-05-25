@@ -475,7 +475,7 @@
       </div>
     </div>
   </div>
-  <form class="contact-form" action="https://formspree.io/f/mpqnjnlj" method="POST" onsubmit="handleSubmit(event)">
+  <form class="contact-form" action="https://formspree.io/f/mpqnjnlj" method="POST">
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Full name</label>
@@ -515,34 +515,7 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => io.observe(el));
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const form = e.target;
-    const btn = form.querySelector('.btn-submit');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-    try {
-      const res = await fetch('https://formspree.io/f/mpqnjnlj', {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        btn.textContent = 'Message sent ✓';
-        btn.style.background = '#6ECB97';
-        form.reset();
-        setTimeout(() => { btn.textContent = 'Send message'; btn.style.background = ''; btn.disabled = false; }, 4000);
-      } else {
-        btn.textContent = 'Failed — try again';
-        btn.style.background = '#E27070';
-        btn.disabled = false;
-      }
-    } catch {
-      btn.textContent = 'Failed — try again';
-      btn.style.background = '#E27070';
-      btn.disabled = false;
-    }
-  }
+
 </script>
 </body>
 </html>
