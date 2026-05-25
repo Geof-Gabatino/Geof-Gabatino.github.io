@@ -475,7 +475,7 @@
       </div>
     </div>
   </div>
-  <form class="contact-form" onsubmit="handleSubmit(event)">
+  <form class="contact-form" action="https://formspree.io/f/mpqnjnlj" method="POST" onsubmit="handleSubmit(event)">
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Full name</label>
@@ -515,12 +515,33 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => io.observe(el));
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.btn-submit');
-    btn.textContent = 'Message sent ✓';
-    btn.style.background = '#6ECB97';
-    setTimeout(() => { btn.textContent = 'Send message'; btn.style.background = ''; }, 3000);
+    const form = e.target;
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    try {
+      const res = await fetch('https://formspree.io/f/mpqnjnlj', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        btn.textContent = 'Message sent ✓';
+        btn.style.background = '#6ECB97';
+        form.reset();
+        setTimeout(() => { btn.textContent = 'Send message'; btn.style.background = ''; btn.disabled = false; }, 4000);
+      } else {
+        btn.textContent = 'Failed — try again';
+        btn.style.background = '#E27070';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Failed — try again';
+      btn.style.background = '#E27070';
+      btn.disabled = false;
+    }
   }
 </script>
 </body>
