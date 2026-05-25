@@ -479,20 +479,20 @@
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Full name</label>
-        <input type="text" class="form-input" placeholder="Jane Smith">
+        <input type="text" name="name" class="form-input" placeholder="Jane Smith" required>
       </div>
       <div class="form-group">
         <label class="form-label">Email</label>
-        <input type="email" class="form-input" placeholder="jane@company.com">
+        <input type="email" name="email" class="form-input" placeholder="jane@company.com" required>
       </div>
     </div>
     <div class="form-group">
       <label class="form-label">Company / Business type</label>
-      <input type="text" class="form-input" placeholder="e.g. E-commerce, Agency, Startup...">
+      <input type="text" name="company" class="form-input" placeholder="e.g. E-commerce, Agency, Startup...">
     </div>
     <div class="form-group">
       <label class="form-label">Message</label>
-      <textarea class="form-input" placeholder="Tell me about your bookkeeping needs and preferred software..."></textarea>
+      <textarea name="message" class="form-input" placeholder="Tell me about your bookkeeping needs and preferred software..." required></textarea>
     </div>
     <button type="submit" class="btn-submit">Send message</button>
   </form>
